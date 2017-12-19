@@ -1,16 +1,49 @@
 const express = require('express');
 const aws = require('aws-sdk');
 require('env2')('config.env');
-
+const getProfile = require('../database/getProfile');
+const getOneProfile = require('../database/getOneProfile');
 const router = express.Router();
+const addProfile = require('../database/addProfile')
 
 const S3_BUCKET = process.env.S3_BUCKET;
 
+
 router.get('/', (req, res) => {
-  res.render('home', {title:'homepage', users:['amir', 'ghassan']},);
-})
+  getProfile((err, rows)=>{
+    if(err) {
+      console.log('there is an error'+err);
+      res.render('home', {title:'homepage', users:[]})
+    } else {
+      res.render('home', {title:'homepage', users:rows})
+    }
+  });
 
+});
 
+router.get('/getProfile/:name', (req, res) => {
+  const name = req.params.name;
+  getOneProfile(name, (err, rows) => {
+    if(err) {
+      console.log('there is an error ' + err);
+    } else {
+      res.render('profile', {title:`profile of ${name}`, user:rows})
+    }
+  });
+});
+
+router.post('/save-details', (req, res) => {
+  const {username, fullname, description, image_url} = req.body;
+  addProfile(username, fullname, description, image_url, (err, result)=>{
+
+    if(err){
+    res.send("User couldn't be added");
+    }
+    res.redirect('/');
+  });
+});
+
+// aws part
 router.get('/sign-s3', (req, res) => {
   const s3 = new aws.S3();
   const fileName = req.query['file-name'];
@@ -36,13 +69,6 @@ router.get('/sign-s3', (req, res) => {
     res.end();
   });
 });
-
-
-router.get('/:name', (req, res) => {
-  const name = req.params.name;
-  res.render('profile', {user:name, title:`profile of ${name}`})
-})
-
 
 
 router.get('*', (req, res) => {

@@ -1,7 +1,10 @@
 <ul>
   {{#each users}}
 
-    <a href={{this}}>
-<li>{{this}}</li></a>
+         <li>
+           <a href={{getLink username}}> <h2>{{fullname}}</h2> <a/>
+           <img src={{image_url}}>
+         </li>
+
   {{/each}}
 </ul>

@@ -5,9 +5,11 @@
 <img id="preview" src="/images/default.png">
 
 <form method="POST" action="/save-details">
-  <input type="hidden" id="avatar-url" name="avatar-url" value="/images/default.png">
   <input type="text" name="username" placeholder="Username"><br>
-  <input type="text" name="full-name" placeholder="Full name"><br><br>
+  <input type="text" name="fullname" placeholder="Full name"><br><br>
+  <textarea rows="10" cols="50" name="description" id="textarea"></textarea><br>
+  <input type="text" id="image_url" name="image_url" placeholder="image_url"><br><br>
+
   <input type="submit" value="Update profile">
 </form>
 <script src="/js/hell.js"></script>

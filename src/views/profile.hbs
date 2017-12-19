@@ -1,12 +1,12 @@
-<h2>{{user}}</h2>
+<h2>{{user.fullname}}</h2>
 
 <section class='wrapper'>
   <div id="picNname">
-    <img src="https://image.flaticon.com/icons/png/128/415/415733.png" alt="apple">
+    <img src={{user.image_url}} alt="profile picture">
   </div>
 
   <div id="description">
-    <p>this is an apple.</p>
+    <p>{{user.description}}</p>
   </div>
 
 

@@ -37,6 +37,8 @@ function uploadFile(file, signedRequest, url){
       if(xhr.status === 200){
           console.log("Succes")
             console.log(url);
+            document.getElementById("image_url").value=url;
+
       }
       else{
         alert('Could not upload file.');

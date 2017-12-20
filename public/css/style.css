@@ -1,8 +1,17 @@
 body {
   background-color: lightblue;
+  font-family: 'Indie Flower', cursive;
+  font-family: 'Fjalla One', sans-serif;
 }
 
-/*navbar*/
+ ul {
+   column-count: 3;
+   flex-direction: row;
+ }
+  li {
+
+   display: inline-block;
+ }
 
 .topnav {
   overflow: hidden;
@@ -10,10 +19,44 @@ body {
 }
 
 .topnav a {
-  float: right;
+  float: left;
   color: #f2f2f2;
+  padding: 0 0.5rem;
   text-align: center;
-  padding: 14px 16px;
+  padding: 0.3rem 1rem;
   text-decoration: none;
   font-size: 17px;
+  border: solid lightgrey 1px;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
+}
+
+.file {
+  display: flex;
+  align-self: center;
+}
+
+.file {
+  display: flex;
+  align-items: center;
+}
+
+.file-system {
+  display: flex;
+  align-items: flex-start;
+  margin: 1rem 0;
+  flex-direction: column;
+}
+
+.form-content {
+  display: flex;
+  justify-content: center;
+}
+
+img {
+  max-width: 25%;
 }

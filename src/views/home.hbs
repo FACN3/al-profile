@@ -1,8 +1,9 @@
 {{>userList}}
 
-<input type="file" id="file-input">
-<p id="status">Please select a file</p>
-<img id="preview" src="/images/default.png">
+
+<div id="myform" class="myform">
+  <input type="file" id="file-input">
+  <p id="status">Please select a file</p>
 
 <form method="POST" action="/save-details">
   <input type="text" name="username" placeholder="Username"><br>
@@ -12,4 +13,7 @@
 
   <input type="submit" value="Update profile">
 </form>
+</div>
+<button id="myBtn">Open Modal</button>
+
 <script src="/js/hell.js"></script>

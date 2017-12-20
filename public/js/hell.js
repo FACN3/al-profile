@@ -2,12 +2,18 @@
 var form = document.getElementById('form');
 
 (() => {
+  var btn = document.getElementById("myBtn");
+  var modal = document.getElementById("myform");
+  btn.onclick = function() {
+    modal.style.display = "block";
+  };
+
   console.log("here");
   document.getElementById("file-input").onchange = () => {
-    const files = document.getElementById('file-input').files;
+    const files = document.getElementById("file-input").files;
     const file = files[0];
-    if(file == null){
-      return alert('No file selected.');
+    if (file == null) {
+      return alert("No file selected.");
     }
     getSignedRequest(file);
   };
@@ -18,38 +24,35 @@ var form = document.getElementById('form');
   });
 })();
 
-function getSignedRequest(file){
+function getSignedRequest(file) {
   const xhr = new XMLHttpRequest();
-  console.log(`/sign-s3?file-name=${file.name}&file-type=${file.type}`)
-  xhr.open('GET', `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+  console.log(`/sign-s3?file-name=${file.name}&file-type=${file.type}`);
+  xhr.open("GET", `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
   xhr.onreadystatechange = () => {
-    if(xhr.readyState === 4){
-      if(xhr.status === 200){
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
         const response = JSON.parse(xhr.responseText);
         uploadFile(file, response.signedRequest, response.url);
-      }
-      else{
-        alert('Could not get signed URL.');
+      } else {
+        alert("Could not get signed URL.");
       }
     }
-    console.log(xhr.readyState+"  "+xhr.status);
+    console.log(xhr.readyState + "  " + xhr.status);
   };
   xhr.send();
 }
 
-function uploadFile(file, signedRequest, url){
+function uploadFile(file, signedRequest, url) {
   const xhr = new XMLHttpRequest();
-  xhr.open('PUT', signedRequest);
+  xhr.open("PUT", signedRequest);
   xhr.onreadystatechange = () => {
-    if(xhr.readyState === 4){
-      if(xhr.status === 200){
-          console.log("Succes")
-            console.log(url);
-            document.getElementById("image_url").value=url;
-
-      }
-      else{
-        alert('Could not upload file.');
+    if (xhr.readyState === 4) {
+      if (xhr.status === 200) {
+        console.log("Succes");
+        console.log(url);
+        document.getElementById("image_url").value = url;
+      } else {
+        alert("Could not upload file.");
       }
     }
   };

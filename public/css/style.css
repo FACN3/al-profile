@@ -1,5 +1,6 @@
 body {
   background-color: lightblue;
+  font-family: 'Indie Flower', cursive;
 }
 
 /*navbar*/
@@ -13,7 +14,7 @@ body {
   float: left;
   color: #f2f2f2;
   text-align: center;
-  padding: 1rem 5rem;
+  padding: 0.3rem 1rem;
   text-decoration: none;
   font-size: 17px;
 }

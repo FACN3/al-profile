@@ -1,3 +1,6 @@
+
+var form = document.getElementById('form');
+
 (() => {
   var btn = document.getElementById("myBtn");
   var modal = document.getElementById("myform");
@@ -14,6 +17,11 @@
     }
     getSignedRequest(file);
   };
+
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    checkIfUserExists();
+  });
 })();
 
 function getSignedRequest(file) {
@@ -49,4 +57,45 @@ function uploadFile(file, signedRequest, url) {
     }
   };
   xhr.send(file);
+}
+
+function checkIfUserExists() {
+  let username = document.getElementById('username').value;
+  if (username) {
+    fetch("/check_user?username=" + username, "GET",
+    function(response) {
+      var result = JSON.parse(response);
+      if(result.available){
+        form.submit();
+      }else{
+        errorMessage("The username already exists.");
+      }
+      console.log('i am logging this result '+ result);
+    });
+  } else {
+    errorMessage("Please fill in the username");
+  }
+}
+
+function fetch(url, method, cb) {
+  var xhr = new XMLHttpRequest();
+  xhr.onreadystatechange = function() {
+    if (xhr.status === 200 && xhr.readyState === 4) {
+      cb(xhr.responseText);
+      console.log(xhr.status);
+      console.log(xhr.responseText);
+    }
+  };
+
+  xhr.open(method, url, true);
+  xhr.send();
+}
+
+
+
+
+function errorMessage(errMessage) {
+  var message = document.createElement("h2");
+  message.innerHTML = errMessage;
+  document.getElementById('err_message').appendChild(message);
 }

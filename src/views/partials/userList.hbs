@@ -2,8 +2,9 @@
   {{#each users}}
 
          <li>
-           <a href={{getLink username}}> <h2>{{fullname}}</h2> <a/>
-           <img src={{image_url}}>
+           <div class ="item">
+           <a href={{getLink username}}> <h2 class="title">{{fullname}}</h2> <a/>
+          <div class="image"> <img src={{image_url}}></div></div>
          </li>
 
   {{/each}}

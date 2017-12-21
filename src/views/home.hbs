@@ -2,29 +2,28 @@
   {{>userList}}
 </div>
 
-
 <div id="myform" class="myform">
   <div class="file">
 
-  <input type="file" id="file-input">
-  <p id="status">Please select a file</p>
-      </div>
-
-<section class="form">
-  <div class="form-content">
-    <form method="POST" action="/save-details">
-      <input type="text" name="username" placeholder="Username"><br>
-      <input type="text" name="fullname" placeholder="Full name"><br><br>
-      <textarea rows="10" cols="50" name="description" id="textarea"></textarea><br>
-      <input type="text" id="image_url" name="image_url" placeholder="image_url"><br><br>
-
-      <input type="submit" value="Update profile">
-    </form>
+    <input type="file" id="file-input">
+    <p id="status">Please select a file</p>
   </div>
-  </div>
+
+  <section class="form">
+    <div class="form-content">
+      <form method="POST" action="/save-details">
+        <input type="text" name="username" placeholder="Username"><br>
+        <input type="text" name="fullname" placeholder="Full name"><br><br>
+        <textarea rows="10" cols="50" name="description" id="textarea"></textarea><br>
+        <input type="text" id="image_url" name="image_url" placeholder="image_url"><br><br>
+
+        <input type="submit" value="Update profile">
+      </form>
+    </div>
+</div>
 </section>
 
-  <input type="submit" value="Update profile">
+<input type="submit" value="Update profile">
 </form>
 </div>
 <button id="myBtn">Open Modal</button>

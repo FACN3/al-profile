@@ -18,6 +18,4 @@ const checkUser = (username, cb) => {
   );
 };
 
-
-
 module.exports = checkUser;

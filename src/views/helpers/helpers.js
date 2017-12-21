@@ -1,3 +1,3 @@
-module.exports= {
-  getLink : username => "/getProfile/"+username
-}
+module.exports = {
+  getLink: username => '/getProfile/' + username
+};

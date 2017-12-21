@@ -11,12 +11,12 @@
 
   <section class="form">
     <div class="form-content">
-      <form method="POST" action="/save-details">
-        <input type="text" name="username" placeholder="Username"><br>
+      <form method="POST" id="form" action="/save-details">
+        <input type="text" name="username" id="username" placeholder="Username"><br>
         <input type="text" name="fullname" placeholder="Full name"><br><br>
         <textarea rows="10" cols="50" name="description" id="textarea"></textarea><br>
         <input type="text" id="image_url" name="image_url" placeholder="image_url"><br><br>
-
+          <div id="err_message"></div>
         <input type="submit" value="Update profile">
       </form>
     </div>

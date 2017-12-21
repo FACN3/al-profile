@@ -8,7 +8,6 @@ var form = document.getElementById('form');
     modal.style.display = "block";
   };
 
-  console.log("here");
   document.getElementById("file-input").onchange = () => {
     const files = document.getElementById("file-input").files;
     const file = files[0];
@@ -26,7 +25,6 @@ var form = document.getElementById('form');
 
 function getSignedRequest(file) {
   const xhr = new XMLHttpRequest();
-  console.log(`/sign-s3?file-name=${file.name}&file-type=${file.type}`);
   xhr.open("GET", `/sign-s3?file-name=${file.name}&file-type=${file.type}`);
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4) {
@@ -37,7 +35,6 @@ function getSignedRequest(file) {
         alert("Could not get signed URL.");
       }
     }
-    console.log(xhr.readyState + "  " + xhr.status);
   };
   xhr.send();
 }
@@ -48,8 +45,6 @@ function uploadFile(file, signedRequest, url) {
   xhr.onreadystatechange = () => {
     if (xhr.readyState === 4) {
       if (xhr.status === 200) {
-        console.log("Succes");
-        console.log(url);
         document.getElementById("image_url").value = url;
       } else {
         alert("Could not upload file.");
@@ -70,7 +65,6 @@ function checkIfUserExists() {
       }else{
         errorMessage("The username already exists.");
       }
-      console.log('i am logging this result '+ result);
     });
   } else {
     errorMessage("Please fill in the username");
@@ -82,11 +76,8 @@ function fetch(url, method, cb) {
   xhr.onreadystatechange = function() {
     if (xhr.status === 200 && xhr.readyState === 4) {
       cb(xhr.responseText);
-      console.log(xhr.status);
-      console.log(xhr.responseText);
     }
   };
-
   xhr.open(method, url, true);
   xhr.send();
 }

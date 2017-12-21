@@ -12,7 +12,6 @@ const S3_BUCKET = process.env.S3_BUCKET;
 router.get('/', (req, res) => {
   getProfile((err, rows) => {
     if (err) {
-      console.log('there is an error' + err);
       res.render('home', { title: 'homepage', users: [] });
     } else {
       res.render('home', { title: 'homepage', users: rows });
@@ -24,7 +23,6 @@ router.get('/check_user', (req, res) => {
   const username = req.url.split('=')[1];
   checkUser(username, (err, rows) => {
     if (err) {
-      console.log('there is an error ' + err);
     } else {
       res.send(JSON.stringify({ available: rows }));
     }
@@ -35,7 +33,6 @@ router.get('/getProfile/:name', (req, res) => {
   const name = req.params.name;
   getOneProfile(name, (err, rows) => {
     if (err) {
-      console.log('there is an error ' + err);
     } else {
       res.render('profile', { title: `profile of ${name}`, user: rows });
     }
@@ -66,7 +63,6 @@ router.get('/sign-s3', (req, res) => {
 
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
     if (err) {
-      console.log(err);
       return res.end();
     }
     const returnData = {
@@ -79,7 +75,6 @@ router.get('/sign-s3', (req, res) => {
 });
 
 router.get('*', (req, res) => {
-  console.log(req.url);
   res.send('page not found');
 });
 

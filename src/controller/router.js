@@ -5,6 +5,8 @@ const getProfile = require("../database/getProfile");
 const getOneProfile = require("../database/getOneProfile");
 const router = express.Router();
 const addProfile = require("../database/addProfile");
+const addProfileNoImage = require("../database/addProfileNoImage");
+
 const checkUser = require("../database/checkUser");
 const S3_BUCKET = process.env.S3_BUCKET;
 
@@ -44,12 +46,21 @@ router.get("/getProfile/:name", (req, res) => {
 
 router.post("/save-details", (req, res) => {
   const { username, fullname, description, image_url } = req.body;
-  addProfile(username, fullname, description, image_url, (err, result) => {
-    if (err) {
-      res.send("User couldn't be added");
-    }
-    res.redirect("/");
-  });
+  if (image_url) {
+    addProfile(username, fullname, description, image_url, (err, result) => {
+      if (err) {
+        res.send("User couldn't be added");
+      }
+      res.redirect("/");
+    });
+  } else {
+    addProfileNoImage(username, fullname, description, (err, result) => {
+      if (err) {
+        res.send("User couldn't be added");
+      }
+      res.redirect("/");
+    });
+  }
 });
 
 // aws part

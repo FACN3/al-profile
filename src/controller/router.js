@@ -9,56 +9,46 @@ const checkUser = require('../database/checkUser');
 
 const S3_BUCKET = process.env.S3_BUCKET;
 
-
-
 router.get('/', (req, res) => {
-  getProfile((err, rows)=>{
-    if(err) {
-      console.log('there is an error'+err);
-      res.render('home', {title:'homepage', users:[]})
+  getProfile((err, rows) => {
+    if (err) {
+      res.render('home', { title: 'homepage', users: [] });
     } else {
-      res.render('home', {title:'homepage', users:rows})
+      res.render('home', { title: 'homepage', users: rows });
     }
   });
-
 });
 
 router.get('/check_user', (req, res) => {
-  const username = req.url.split("=")[1];
-
+  const username = req.url.split('=')[1];
   checkUser(username, (err, rows) => {
-    if(err) {
-      console.log('there is an error '+ err);
+    if (err) {
     } else {
-      res.send(JSON.stringify({available:rows}))
+      res.send(JSON.stringify({ available: rows }));
     }
-  })
-})
-
+  });
+});
 
 router.get('/getProfile/:name', (req, res) => {
   const name = req.params.name;
   getOneProfile(name, (err, rows) => {
-    if(err) {
-      console.log('there is an error ' + err);
+    if (err) {
     } else {
-      res.render('profile', {title:`profile of ${name}`, user:rows})
+      res.render('profile', { title: `profile of ${name}`, user: rows });
     }
   });
 });
 
 router.post('/save-details', (req, res) => {
-  const {username, fullname, description, image_url} = req.body;
-  addProfile(username, fullname, description, image_url, (err, result)=>{
-
-    if(err){
-    res.send("User couldn't be added");
+  const { username, fullname, description, image_url } = req.body;
+  addProfile(username, fullname, description, image_url, (err, result) => {
+    if (err) {
+      res.send("User couldn't be added");
     }
     res.redirect('/');
   });
 });
 
-// aws part
 router.get('/sign-s3', (req, res) => {
   const s3 = new aws.S3();
   const fileName = req.query['file-name'];
@@ -72,8 +62,7 @@ router.get('/sign-s3', (req, res) => {
   };
 
   s3.getSignedUrl('putObject', s3Params, (err, data) => {
-    if(err){
-      console.log(err);
+    if (err) {
       return res.end();
     }
     const returnData = {
@@ -85,11 +74,8 @@ router.get('/sign-s3', (req, res) => {
   });
 });
 
-
 router.get('*', (req, res) => {
-  console.log(req.url);
   res.send('page not found');
-})
-
+});
 
 module.exports = router;

@@ -13,7 +13,7 @@ Very similiar to the [express-handlebars-workshop](https://github.com/foundersan
 
 So you basicly click on the profile you like, and you will get redirceted to that profile's page
 
- ##### Using our website
+ ## Using our website
 
 [Our heroku website link](https://alprofile.herokuapp.com/)
 
@@ -28,7 +28,5 @@ So you basicly click on the profile you like, and you will get redirceted to tha
   3. Enjoy the site
 
  ## Idea Sketch
- 
-![sketch](https://user-images.githubusercontent.com/24490876/34249926-06de8db0-e644-11e7-9cc6-029ea2f31fbc.jpg)
 
- ## How to install and run the site:
+![sketch](https://user-images.githubusercontent.com/24490876/34249926-06de8db0-e644-11e7-9cc6-029ea2f31fbc.jpg)
